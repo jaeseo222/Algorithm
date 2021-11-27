@@ -50,7 +50,7 @@ int main() {
 			if (findParent(a) == findParent(b))
 				cout << "YES\n";
 			else
-				cout << "NO\n";
+				cout << "NO\n"; 
 		}
 	}
 }
