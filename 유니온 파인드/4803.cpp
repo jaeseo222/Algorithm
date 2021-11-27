@@ -5,7 +5,7 @@ using namespace std;
 vector<bool> cycle;//사이클 여부
 vector<int> parent;
 
-//find
+//find 
 int find(int node) {
 	if (parent[node] < 0)//루트
 		return node;
