@@ -3,14 +3,14 @@
 using namespace std;
 
 const int INF = 1e9;
-int solu(int n,int k, vector<int>& coin) {
-	vector<int> dp(n+1, INF);
+int solu(int n, int k, vector<int>& coin) {
+	vector<int> dp(k + 1, INF);
 
-	dp[0] = 0;
+	dp[0] = 0;//0 가치 초기화
 	for (int i = 0; i < n; i++)
-		for (int j = coin[i]; j <= k; i++)
+		for (int j = coin[i]; j <= k; j++)
 			if (dp[j - coin[i]] != INF)
-				dp[j] = min(dp[j], dp[j-coin[i]]+1);
+				dp[j] = min(dp[j], dp[j - coin[i]] + 1);
 	if (dp[k] == INF)
 		return -1;
 	return dp[k];
