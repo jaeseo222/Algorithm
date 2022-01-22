@@ -10,7 +10,7 @@ void fillStar(vector<vector<char>> &star,int w,  int row, int col) {
 
 	fillStar(star, w-4 , row+2, col+2);
 
-	for (int i = row; i < row + w; i++)
+	for (int i = row; i < row + w; i++) // 테두리 별 채우기
 		star[i][col] = star[row][i] = star[i][col + w - 1] = star[row + w - 1][i] = '*';
 }
 
