@@ -3,20 +3,22 @@
 #include<algorithm>
 using namespace std;
 
+int calcTime(vector<int>&withdraw, int n) {
+	int sum = 0;
+	for (int i = 0; i < n; i++)
+		sum += withdraw[i] * (n-i);
+	return sum;
+}
+
 int main() {
-	int n, ans = 0;
+	int n;
 	cin >> n;
 
-	vector<int> timeArr(n);
+	vector<int> withdraw(n);
 	for (int i = 0; i < n; i++)
-		cin >> timeArr[i];
+		cin >> withdraw[i];
 
-	sort(timeArr.begin(), timeArr.end());
+	sort(withdraw.begin(), withdraw.end());
 
-	for (int i = 0; i < n-1; i++)
-		timeArr[i+1] += timeArr[i];
-
-	for (int i = 0; i < n; i++)
-		ans += timeArr[i];
-	cout <<ans;
+	cout << calcTime(withdraw, n);
 }
