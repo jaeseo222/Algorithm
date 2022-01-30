@@ -15,9 +15,8 @@ int** fillGraph(int n, int** fares) {
 			graph[i][j] = INF;
 		graph[i][i] = 0;// 자기 자신과의 비용은 0
 	}
-
-	// 동적할당된 fares의 원소 개수 구하기 : _msize(fares) / sizeof(int*)
-	for (int i = 0; i < _msize(fares) / sizeof(int*); i++) { // a->b 와 b->a 의 비용이 같은 양방향 그래프
+	// 동적할당된 fares의 메모리 row 크기 구하기 : _msize(fares) / sizeof(fares)
+	for (int i = 0; i < _msize(fares) / sizeof(fares); i++) { // a->b 와 b->a 의 비용이 같은 양방향 그래프
 		graph[fares[i][0]][fares[i][1]] = fares[i][2];
 		graph[fares[i][1]][fares[i][0]] = fares[i][2];
 	}
