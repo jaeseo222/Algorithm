@@ -6,7 +6,7 @@ int min(int a, int b) {
 	return a < b ? a : b;
 }
 
-int** fillGraph(int n, int fares[][3]) {
+int** fillGraph(int n, int** fares) {
 	int** graph = (int**)malloc(sizeof(int*) * (n + 1));
 
 	for (int i = 1; i <= n; i++) {
@@ -16,8 +16,8 @@ int** fillGraph(int n, int fares[][3]) {
 		graph[i][i] = 0;// 자기 자신과의 비용은 0
 	}
 
-	printf("%d\n", sizeof(fares) / sizeof(fares[0]));
-	for (int i = 0; sizeof(fares)/sizeof(fares[0]); i++) { // a->b 와 b->a 의 비용이 같은 양방향 그래프
+	// 동적할당된 fares의 원소 개수 구하기 : _msize(fares) / sizeof(int*)
+	for (int i = 0; i < _msize(fares) / sizeof(int*); i++) { // a->b 와 b->a 의 비용이 같은 양방향 그래프
 		graph[fares[i][0]][fares[i][1]] = fares[i][2];
 		graph[fares[i][1]][fares[i][0]] = fares[i][2];
 	}
@@ -40,7 +40,7 @@ void floydWarshall(int** graph, int n) {
 				// i->j와 i->k->j 중 더 적은 비용으로 갱신
 				graph[i][j] = min(graph[i][j], graph[i][k] + graph[k][j]);
 }
-int solution(int n, int s, int a, int b, int fares[][3]) {
+int solution(int n, int s, int a, int b, int** fares) {
 	int answer = INF;
 	int** graph = fillGraph(n, fares); // 초기화
 
@@ -55,15 +55,23 @@ int solution(int n, int s, int a, int b, int fares[][3]) {
 }
 int main() {
 	// 예시
-	int fares[][3] = { {4, 1, 10},
-							 {3, 5, 24},
-							 {5, 6, 2},
-							 {3, 1, 41},
-							 {5, 1, 24},
-							 {4, 6, 50},
-							 {2, 4, 66},
-							 {2, 3, 22},
-							 {1, 6, 25} };
+	/*
+	4 1 10
+	3 5 24
+	5 6 2
+	3 1 41
+	5 1 24
+	4 6 50
+	2 4 66
+	2 3 22
+	1 6 25
+	*/
+	int** fares = (int**)malloc(sizeof(int*) * 9);
+	for (int i = 0; i < 9; i++) {
+		fares[i] = (int*)malloc(sizeof(int) * 3);
+		for (int j = 0; j < 3; j++)
+			scanf("%d", &fares[i][j]);
+	}
 	int ans = solution(6, 4, 6, 2, fares);
 	printf("%d", ans);
 }
