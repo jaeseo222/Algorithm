@@ -21,15 +21,6 @@ int** fillGraph(int n, int** fares) {
 		graph[fares[i][0]][fares[i][1]] = fares[i][2];
 		graph[fares[i][1]][fares[i][0]] = fares[i][2];
 	}
-
-	for (int i = 1; i <= n; i++) {
-		for (int j = 1; j <= n; j++)
-			if (graph[i][j] == INF)
-				printf("INF ");
-			else
-				printf("%d ", graph[i][j]);
-		printf("\n");
-	}
 	return graph;
 }
 
@@ -56,6 +47,8 @@ int solution(int n, int s, int a, int b, int** fares) {
 int main() {
 	// 예시
 	/*
+	동적할당을 위해 직접 입력
+
 	4 1 10
 	3 5 24
 	5 6 2
