@@ -3,24 +3,16 @@
 #include<algorithm>
 using namespace std;
 int binaryFun(int left, int right, int m, vector<int>& arr) {
-	int maxi = 0, ans = 0;
+	int ans = 0;
 	while (left <= right) {
 		int mid = (left + right) / 2;
 
-		int num = 0, tmp = 0;
+		int num = 0;
 		for (int i = 0; i < arr.size(); i++)
-			if (arr[i] >= mid) {
-				num += mid;
-				tmp = max(tmp, mid);
-			}
-			else {
-				num += arr[i];
-				tmp = max(tmp, arr[i]);
-			}
+			num += min(arr[i], mid);
 
 		if (num <= m) {
-			maxi = max(maxi, num);
-			ans = max(ans, tmp);
+			ans = mid;
 			left = mid + 1;
 		}
 		else
