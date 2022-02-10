@@ -1,6 +1,5 @@
 #include<iostream>
 #include<vector>
-#include<algorithm>
 using namespace std;
 vector<int> solu(int n, vector<pair<int, int>>& arr) {
 	vector<int> ans(n, 1);
